@@ -4,24 +4,28 @@ Author: Darren Kelly (Webel IT Australia, https://www.webel.com.au)
 
 This mini test web app is for demonstration and investigation of when or whether 
 @PreDestroy methods are called and whether garbage collection succeeds for various 
-forms of @ViewScoped JavaServer Faces (JSF) beans. It accompanies this forum posting:
+forms of @ViewScoped JavaServer Faces (JSF) beans. It accompanies these forum postings:
 
     JSF: Mojarra vs. OmniFaces @ViewScoped: @PreDestroy called but bean can't be garbage collected
     http://stackoverflow.com/questions/40569971/jsf-mojarra-vs-omnifaces-viewscoped-predestroy-called-but-bean-cant-be-gar
 
-This NetBeans IDE 8.1 project may be deployed to the bundled Glassfish 4.1.1 web app server
+    How detect and remove (during a session) unused @ViewScoped beans that can't be garbage collected
+    https://stackoverflow.com/questions/30410601/how-detect-and-remove-during-a-session-unused-viewscoped-beans-that-cant-be
+
+This NetBeans IDE 8.2 project may be deployed to the bundled Glassfish 4.1.1 web app server
 (or to an additionally installed Payara41 web app server). Download from:
 
 - http://www.netbeans.org (required)
 
 - http://www.payara.fish (optional)
 
+You may have to set your own web application server under Properties > Run.
 
 
 MOJARRA JSF IMPLEMENTATION VERSION
 
 Currently the web app is for demonstration against the Mojarra 2.x JSF implementation series.
-Use the JSF Mojarra version bundled with NetBeans8.1/Glassfish4.1.1 or install a recent version:
+Use the JSF Mojarra version bundled with NetBeans8.2/Glassfish4.1.1 or install a recent version:
 
 - Use Maven or download javax.faces.jar directly from:
 
@@ -33,8 +37,8 @@ Use the JSF Mojarra version bundled with NetBeans8.1/Glassfish4.1.1 or install a
 
 To install by hand, stop your web app server and copy the Mojarra JAR to:
 
-.../NetBeans-8.1/glassfish-4.1.1/glassfish/modules/javax.faces.jar
-.../NetBeans-8.1/payara41/glassfish/modules/javax.faces.jar
+.../NetBeans-8.2/glassfish-4.1.1/glassfish/modules/javax.faces.jar
+.../NetBeans-8.2/payara41/glassfish/modules/javax.faces.jar
 
 Then restart your server:
 
@@ -143,7 +147,7 @@ If using NetBeans IDE Profiler:
 
 -- Choose to Profile Selected classes, then select these 3 classes:
 
-    com.webel.jsf.Jsf20ViewBean, com.webel.jsf.Jsf22ViewBean, com.webel.jsf.OmniViewBean
+    com.webel.jsf.Jsf20ViewBean, com.webel.jsf.Jsf23ViewBean, com.webel.jsf.OmniViewBean
 
     Instances for them won't be shown in the Profiler until you choose a matching test page.
 
@@ -164,10 +168,10 @@ The initial web page is an index to 3 test cases, one for each of the bean forms
 
 
     import javax.inject.Named;
-    import javax.faces.view.ViewScoped; // CDI-compatible JSF2.2 version
+    import javax.faces.view.ViewScoped; // CDI-compatible JSF2.3 version
     @Named
     @ViewScoped
-    public class Jsf22ViewBean extends AbstractViewBean {
+    public class Jsf23ViewBean extends AbstractViewBean {
 
 
 

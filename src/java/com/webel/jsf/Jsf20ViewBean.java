@@ -16,7 +16,8 @@ public class Jsf20ViewBean extends AbstractViewBean {
 
     private static final Logger logger = Logger.getLogger(Jsf20ViewBean.class.getName());
     
-    static protected Logger getLogger() {
+    @Override
+    protected Logger myLogger() {
         return logger;
     }
     

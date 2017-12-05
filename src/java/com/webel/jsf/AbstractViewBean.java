@@ -15,12 +15,10 @@ abstract public class AbstractViewBean implements Serializable {
 
     private static final Logger logger = Logger.getLogger(AbstractViewBean.class.getName());
     
-    static protected Logger getLogger() {
-        return logger;
-    }
+    abstract protected Logger myLogger();
     
     protected void echo(String s) {
-        getLogger().log(Level.INFO, "{0}: {1}", new Object[]{this.getClass().getSimpleName(), s});
+        myLogger().log(Level.INFO, "{0}: {1}", new Object[]{this.getClass().getSimpleName(), s});
     }
     
     /**
