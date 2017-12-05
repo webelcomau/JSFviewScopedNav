@@ -16,11 +16,11 @@
 
         <ui:include src="header.xhtml">
             <ui:param name="author" value="#{author}"/>
-            <ui:param name="beantype" value="a JSF2.2 @ViewScoped (javax.faces.view.ViewScoped) @Named bean"/>
+            <ui:param name="beantype" value="a JSF2.3 @ViewScoped (javax.faces.view.ViewScoped) @Named bean"/>
         </ui:include>
 
         <ui:include src="common_upper.xhtml">
-            <ui:param name="viewBean" value="#{jsf22ViewBean}"/>
+            <ui:param name="viewBean" value="#{jsf23ViewBean}"/>
         </ui:include>
         
         <p>
@@ -47,26 +47,26 @@
             <h:form id="form">
 
                 <p>
-                    - <h:commandButton value="h:commandButton: TO 'done' via action method" action="#{jsf22ViewBean.actionDone()}"/>
-                    : <span style="#{style_not}">#{info_not_gc}</span> <span style="#{style_yes}">#{info_yes_preDestroy}</span>
+                    - <h:commandButton value="h:commandButton: TO 'done' via action method" action="#{jsf23ViewBean.actionDone()}"/>
+                    : <span style="#{style_yes}">#{info_yes_gc}</span> <span style="#{style_yes}">#{info_yes_preDestroy}</span>
                 </p>
                 
                 <p>
                     - <h:commandButton value="h:commandButton: TO 'done' via action String" action="done"/>
-                    : <span style="#{style_not}">#{info_not_gc}</span> <span style="#{style_yes}">#{info_yes_preDestroy}</span>
+                    : <span style="#{style_yes}">#{info_yes_gc}</span> <span style="#{style_yes}">#{info_yes_preDestroy}</span>
                 </p>
 
                 <hr/>
 
                 <p>
-                    - <h:commandButton value="h:commandButton: STAY: action method returns 'null'" action="#{jsf22ViewBean.actionNull()}"/> : no additional @ViewScoped bean created.
+                    - <h:commandButton value="h:commandButton: STAY: action method returns 'null'" action="#{jsf23ViewBean.actionNull()}"/> : no additional @ViewScoped bean created.
                 </p>
 
             </h:form>
         </fieldset>
 
         <p>
-            - <b>Browser page reload:</b> creates a new @ViewScoped bean, previous <span style="#{style_not}">#{info_not_gc}</span> <span style="#{style_yes}">#{info_yes_preDestroy}</span>
+            - <b>Browser page reload:</b> creates a new @ViewScoped bean, previous <span style="#{style_not}">#{info_not_gc}</span> <span style="#{style_not}">#{info_not_preDestroy}</span>
         </p>
 
     </h:body>
