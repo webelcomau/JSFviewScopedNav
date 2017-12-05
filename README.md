@@ -35,6 +35,7 @@ Use the JSF Mojarra version bundled with NetBeans8.2/Glassfish4.1.1 or install a
 To install by hand, stop your web app server and copy the Mojarra JAR to:
 
 `.../NetBeans-8.2/glassfish-4.1.1/glassfish/modules/javax.faces.jar`
+
 `.../NetBeans-8.2/payara41/glassfish/modules/javax.faces.jar`
 
 Then restart your server:
@@ -123,7 +124,7 @@ This will run the project in profiling mode (and usually restarts the web app se
 - Click the settings gear wheel icon (top right).
   - Choose to Profile Selected classes, then select these 3 classes:
 
-    com.webel.jsf.Jsf20ViewBean, com.webel.jsf.Jsf23ViewBean, com.webel.jsf.OmniViewBean
+    `com.webel.jsf.Jsf20ViewBean`, `com.webel.jsf.Jsf23ViewBean`, `com.webel.jsf.OmniViewBean`
     Instances for them won't be shown in the Profiler until you choose a matching test page.
 
 
