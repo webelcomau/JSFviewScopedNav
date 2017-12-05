@@ -58,8 +58,10 @@ You will need a tool for diagnosing memory use and references to instances of JS
 
 - You can use the Profiler within NetBeans IDE.
 
-- Optionally - if not already bundled with your JDK as 'jvisualvm' - 
-  download and install VisualVM from https://visualvm.github.io/
+- 2017-12-05 DO NOT use JVisualVM ! It gives incorrect results. When attached to GlassFish/Payara
+it gives references still held (even after @PreDestroy called) by a field sessionListeners of type 
+com.sun.web.server.WebContainerListener within ContainerBase$ContainerBackgroundProcessor, and they won't GC ! 
+See https://stackoverflow.com/questions/40569971/jsf-mojarra-vs-omnifaces-viewscoped-predestroy-called-but-bean-cant-be-gar
 
 
 ON USE OF OMNIFACES
@@ -105,36 +107,10 @@ The folder ./nbproject/private is NOT distributed with the test web app, so thes
 
 STEP: clean and build.
 
-The procedure is then slightly different depending on whether you use 
-VisualVM (recommended) or the NetBeans built-in Profiler.
 
+STEP: run in profiling mode:
 
-If using VisualVM:
-
-- Run the project, it should start your web app server and deploy the test web app,
-  which will open in whatever web browser you have set as default in NetBeans IDE.
-
-- Then (after it has launched) run 'jvisualvm' from a terminal command line.
-
-- In VisualVM you'll see 'GlassFish' as a process (Payara also runs as 'GlassFish').
-
-- Open that 'GlassFish' process (use right click context menu).
-
-- Click on the Monitor tab and note how you can observe the 
-  Garbage Collection (GC) activity under CPU (top left)
-
-- Choose the Sampler tab then Memory.
-
-- Note how there is a button to Perform GC.
-
-- Under the Class Name Filter at the bottom enter 'com.webel.jsf'
-
--- Initially you will only see one instance of a helper class: com.webel.jsf.JavaUtil.
-
--- Later (once you start loading test pages) you will see instances of various @ViewScoped beans.
-
-
-If using NetBeans IDE Profiler:
+Then use the NetBeans built-in Profiler, DO NOT use JVisualVM !
 
 - DO NOT use the usual Run button, use instead Profile (right click context menu on Project node).
 
@@ -186,7 +162,7 @@ Each test page creates (usually) a new @ViewScoped bean when first loaded.
 Of interest is what happens to referenced beans once the view page is left
 (whereby the result depends on the bean type and navigation method used).
 
-- Concern1: Are any @PreDestroy invoked so there is an opportunity to clean up resources ?
+- Concern1: Is @PreDestroy invoked so there is an opportunity to clean up resources ?
 
 - Concern2: Can the @ViewScoped bean itself be garbage collected ?
 
